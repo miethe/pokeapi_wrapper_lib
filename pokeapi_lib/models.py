@@ -13,10 +13,11 @@ class NamedAPIResource(BaseModel):
     url: str
 
 # --- Type Models ---
-class TypeInfo(NamedAPIResource):
+class TypeInfo(BaseModel):
      """Basic info about a Type resource from PokeAPI."""
-     # ID isn't directly available in all contexts, fetch separately if needed
-     id: Optional[int] = None # Make ID optional or fetch in get_type
+    name: str
+    # ID isn't directly available in all contexts, fetch separately if needed
+    id: Optional[int] = None # Make ID optional or fetch in get_type
 
 class PokemonTypeSlot(BaseModel):
     slot: int
@@ -44,10 +45,20 @@ class SpriteData(BaseModel):
     back_female: Optional[str] = None
     front_shiny_female: Optional[str] = None
     back_shiny_female: Optional[str] = None
+    
+    # Official Artwork (extracted via validator)
+    official_artwork: Optional[str] = Field(None, description="URL for official artwork sprite")
+
+    # Animated Sprites (will be populated by root_validator)
+    animated_front_default: Optional[str] = None
+    animated_back_default: Optional[str] = None
+    animated_front_shiny: Optional[str] = None
+    animated_back_shiny: Optional[str] = None
+    
     # Use aliases for nested fields (requires populate_by_name=True)
-    official_artwork_front: Optional[str] = Field(None, validation_alias='other.official-artwork.front_default')
-    animated_front_default: Optional[str] = Field(None, validation_alias='versions.generation-v.black-white.animated.front_default')
-    animated_front_shiny: Optional[str] = Field(None, validation_alias='versions.generation-v.black-white.animated.front_shiny')
+    #official_artwork_front: Optional[str] = Field(None, validation_alias='other.official-artwork.front_default')
+    #animated_front_default: Optional[str] = Field(None, validation_alias='versions.generation-v.black-white.animated.front_default')
+    #animated_front_shiny: Optional[str] = Field(None, validation_alias='versions.generation-v.black-white.animated.front_shiny')
     # Add aliases for other animated/nested sprites if needed
 
     @root_validator(pre=True)
