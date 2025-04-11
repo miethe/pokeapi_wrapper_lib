@@ -119,8 +119,13 @@ class SpriteData(BaseModel):
             logger.debug(f"LIB: Transforming sprite URLs to local. Base: {_local_base}")
             for key, url in values.items():
                 if isinstance(url, str) and url.startswith(_remote_base):
+                    # Replace base URL with local path base
+                    # Example: https://.../master/sprites/pokemon/1.png -> /assets/sprites/sprites/pokemon/1.png
                     relative_path = url.removeprefix(_remote_base)
                     values[key] = f"{_local_base}{relative_path}"
+                elif isinstance(url, str) and not url.startswith(('/', 'http')):
+                     # Handle cases where a relative path might already exist unexpectedly? Optional.
+                     logger.warning(f"Sprite URL '{url}' for key '{key}' is not absolute. Skipping transformation.")
                 elif isinstance(url, str) and url.startswith("http://"): # Ensure HTTPS for remote
                      values[key] = url.replace("http://", "https://", 1)
         elif _sprite_source_mode == 'remote': # Ensure HTTPS for remote mode too

@@ -54,17 +54,17 @@ async def get_pokemon(
     try:
         raw_data = await fetch_resource(endpoint, client, base_url)
     except ResourceNotFoundError:
-         raise # Re-raise specific not found error
+        raise # Re-raise specific not found error
     except Exception as e:
-         raise PokeAPIError(f"Failed to fetch Pokemon data for '{identifier}'") from e
+        raise PokeAPIError(f"Failed to fetch Pokemon data for '{identifier}'") from e
 
     # 3. Validate and Model Data
     try:
-         # Extract/transform specific fields if needed before validation
-         if raw_data.get('sprites'):
-             raw_data['sprites']['official_artwork_front'] = raw_data['sprites'].get('other', {}).get('official-artwork', {}).get('front_default')
+        # Extract/transform specific fields if needed before validation
+        #if raw_data.get('sprites'):
+        #    raw_data['sprites']['official_artwork_front'] = raw_data['sprites'].get('other', {}).get('official-artwork', {}).get('front_default')
 
-         pokemon = BasePokemon.model_validate(raw_data)
+        pokemon = BasePokemon.model_validate(raw_data)
     except Exception as e:
         logger.error(f"Failed to validate Pokemon data for '{identifier}'. Error: {e}", exc_info=True)
         # logger.debug(f"Raw data: {raw_data}") # Debug raw data if validation fails
