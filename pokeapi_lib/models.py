@@ -50,6 +50,46 @@ class SpriteData(BaseModel):
     animated_front_shiny: Optional[str] = Field(None, validation_alias='versions.generation-v.black-white.animated.front_shiny')
     # Add aliases for other animated/nested sprites if needed
 
+    @root_validator(pre=True)
+    def extract_nested_sprites(cls, values: dict):
+        """
+        Extracts deeply nested sprites (official artwork, animated)
+        and adds them to the top level for easier field assignment.
+        Runs before individual field validation.
+        """
+        if not isinstance(values, dict): # Handle case where input isn't a dict
+            return values
+
+        # Extract Official Artwork
+        official_artwork_url = values.get('other', {}).get('official-artwork', {}).get('front_default')
+        if official_artwork_url:
+            values['official_artwork'] = official_artwork_url # Add to dict for field assignment
+
+        # Extract Animated Sprites (Gen V Black/White)
+        try:
+            animated_sprites = values.get('versions', {}).get('generation-v', {}).get('black-white', {}).get('animated', {})
+            if animated_sprites: # Check if animated dict exists and is not None
+                 values['animated_front_default'] = animated_sprites.get('front_default')
+                 values['animated_back_default'] = animated_sprites.get('back_default')
+                 values['animated_front_shiny'] = animated_sprites.get('front_shiny')
+                 values['animated_back_shiny'] = animated_sprites.get('back_shiny')
+                 values['animated_front_female'] = animated_sprites.get('front_female') # Get if exists
+                 values['animated_back_female'] = animated_sprites.get('back_female')
+                 values['animated_front_shiny_female'] = animated_sprites.get('front_shiny_female')
+                 values['animated_back_shiny_female'] = animated_sprites.get('back_shiny_female')
+        except Exception as e:
+            # Log potential errors during complex extraction, but don't fail validation
+            logger.warning(f"Could not extract animated sprites: {e}", exc_info=False) # Set exc_info=False to avoid clutter
+
+        return values
+
+    @validator("*", pre=True, allow_reuse=True)
+    def ensure_https_url(cls, value):
+        """Ensure sprite URLs are HTTPS for security and browser compatibility."""
+        if isinstance(value, str) and value.startswith("http://"):
+            return value.replace("http://", "https://", 1) # Replace only the first occurrence
+        return value
+
     # --- Root validator ONLY for URL Transformation ---
     @root_validator(skip_on_failure=True) # Post-validation default
     def transform_urls_if_local(cls, values: Dict[str, Any]):

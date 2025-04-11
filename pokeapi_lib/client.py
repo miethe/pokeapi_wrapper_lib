@@ -7,7 +7,7 @@ from .exceptions import ResourceNotFoundError, PokeAPIConnectionError
 logger = logging.getLogger(__name__)
 
 DEFAULT_BASE_URL = "https://pokeapi.co/api/v2"
-DEFAULT_TIMEOUT = httpx.Timeout(15.0, connect=5.0) # Slightly longer default timeout
+DEFAULT_TIMEOUT = httpx.Timeout(30.0, connect=7.0) # Slightly longer default timeout
 
 # --- Client Management ---
 # Option 1: Global client (simpler for basic use, less flexible)

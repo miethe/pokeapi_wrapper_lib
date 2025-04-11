@@ -1,4 +1,3 @@
-# backend/app/config.py
 
 import os
 from pydantic_settings import BaseSettings
@@ -38,7 +37,7 @@ class Settings(BaseSettings):
 
     # --- Sprite Setting ---
     # Use 'local' to serve from /assets/sprites, 'remote' to use PokeAPI URLs
-    sprite_source_mode: Literal['local', 'remote'] = "remote" # Default to remote
+    sprite_source_mode: Literal['local', 'remote'] = "local" # Default to local
 
     class Config:
         # Specifies the .env file encoding
