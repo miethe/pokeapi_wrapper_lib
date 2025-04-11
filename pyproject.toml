@@ -1,0 +1,38 @@
+# pokeapi_wrapper_lib/pyproject.toml
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pokeapi_wrapper_lib"
+version = "0.1.0"
+authors = [
+  { name="Nick Miethe", email="miethe.dev@gmail.com" }
+]
+description = "An asynchronous Python wrapper library for PokeAPI v2 with caching and Pydantic models."
+readme = "README.md"
+requires-python = ">=3.8" # Minimum Python version
+license = { text="MIT" } # Or your chosen license
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Intended Audience :: Developers",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Internet",
+]
+dependencies = [
+    "httpx[http2]>=0.24",
+    "pydantic>=2.0",
+    "redis[hiredis]>=4.4",
+    # Add python-dotenv here if the library needs to load a .env itself
+]
+
+[project.urls]
+Homepage = "https://github.com/<your-username>/<your-repo-name>" # Link to your main project or a dedicated repo for the lib
+# Bug Tracker = "..."
+
+# Optional: Add entry points if creating command-line tools from the lib
+# [project.scripts]
+# pokecli = "pokeapi_lib.cli:main"

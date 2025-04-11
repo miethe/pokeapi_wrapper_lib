@@ -1,0 +1,5 @@
+# pokeapi_wrapper_lib/requirements.txt
+httpx[http2]>=0.24 # Use a recent version, http2 optional but good
+pydantic>=2.0      # Assuming Pydantic v2+ for model_validate/model_dump
+redis[hiredis]>=4.4 # For async redis
+python-dotenv      # Only needed if library loads its own config, less common
