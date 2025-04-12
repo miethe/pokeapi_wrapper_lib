@@ -30,7 +30,7 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/<your-username>/<your-repo-name>" # Link to your main project or a dedicated repo for the lib
+Homepage = "https://github.com/miethe/pokeapi_wrapper_lib" # Link to your main project or a dedicated repo for the lib
 # Bug Tracker = "..."
 
 # Optional: Add entry points if creating command-line tools from the lib

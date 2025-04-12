@@ -14,7 +14,7 @@ class NamedAPIResource(BaseModel):
 
 # --- Type Models ---
 class TypeInfo(BaseModel):
-     """Basic info about a Type resource from PokeAPI."""
+    """Basic info about a Type resource from PokeAPI."""
     name: str
     # ID isn't directly available in all contexts, fetch separately if needed
     id: Optional[int] = None # Make ID optional or fetch in get_type
@@ -136,7 +136,8 @@ class SpriteData(BaseModel):
         return values
 
     class Config:
-         populate_by_name = True # Enable alias usage
+        #populate_by_name = True # Enable alias usage
+        pass
 
 class BasePokemon(BaseModel):
     """Core Pokemon data returned by the library."""
