@@ -1,7 +1,7 @@
 # PokeAPI Wrapper Library (Python)
 
 [![PyPI version](https://badge.fury.io/py/pokeapi-wrapper-lib.svg)](https://badge.fury.io/py/pokeapi-wrapper-lib) <!-- Replace with actual PyPI badge if published -->
-[![Build Status](https://img.shields.io/badge/build-passing-brightgreen)](https://github.com/<your-username>/pokeapi_wrapper_lib/actions) <!-- Replace -->
+[![Python package](https://github.com/miethe/pokeapi_wrapper_lib/actions/workflows/python-package.yml/badge.svg)](https://github.com/miethe/pokeapi_wrapper_lib/actions/workflows/python-package.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 An asynchronous Python library providing a cleaner interface to interact with the PokeAPI v2 (pokeapi.co). It features:
