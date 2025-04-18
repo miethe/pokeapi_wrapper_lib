@@ -1,6 +1,6 @@
 # PokeAPI Wrapper Library (Python)
 
-[![PyPI version](https://badge.fury.io/py/pokeapi-wrapper-lib.svg)](https://badge.fury.io/py/pokeapi-wrapper-lib) <!-- Replace with actual PyPI badge if published -->
+[![PyPi](https://github.com/miethe/pokeapi_wrapper_lib/actions/workflows/python-publish.yml/badge.svg)](https://github.com/miethe/pokeapi_wrapper_lib/actions/workflows/python-publish.yml)
 [![Python package](https://github.com/miethe/pokeapi_wrapper_lib/actions/workflows/python-package.yml/badge.svg)](https://github.com/miethe/pokeapi_wrapper_lib/actions/workflows/python-package.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
